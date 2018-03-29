@@ -1,4 +1,4 @@
-n0ni0/lamp
+docker-lamp
 ===========
 
 This docker-compose create a lamp environment ready to develop with the feature to have all your proyects reusing the same containers.
