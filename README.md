@@ -51,7 +51,7 @@ Services:
 
 Folder structure
 ----
-* www : Put your proyect folder there.
+* public : Put your proyect folder there.
 * db/init : Any scripts (SQL or sh) placed there will be ran on the first machine build. Usefull for importing a database
 * db/data : This is where the MySQL database are stored. You can copy your MySQL database straight there too (it might require some tweaks though, have a read at the MySQL docker image documentation).
 
