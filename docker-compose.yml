@@ -1,0 +1,58 @@
+version: "2"
+services:
+  db:
+    image: 'mysql:5.6'
+    volumes:
+      - "./db/data:/var/lib/mysql"
+      - "./db/init:/docker-entrypoint-initdb.d"
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: test
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+
+  mailcatcher:
+    image: yappabe/mailcatcher
+    ports:
+        - "1025:1025"
+        - "1080:1080"
+    restart: unless-stopped
+
+  php:
+    depends_on:
+      - mailcatcher
+    build: fpm/
+    links:
+      - db:mysqldb
+    volumes:
+      - ./public:/var/www/html
+      - ./fpm/custom.ini:/usr/local/etc/php/conf.d/custom.ini
+    restart: unless-stopped
+    ports: 
+      - "35729:35729"
+
+  apache:
+    build: apache/
+    links:
+      - php:phpfpm
+    volumes:
+      - ./public:/var/www/html
+      - ./apache/hosts:/etc/apache2/sites-enabled
+    restart: unless-stopped
+    ports:
+      - 80:80
+
+  phpmyadmin:
+    depends_on:
+      - db
+    image: phpmyadmin/phpmyadmin
+    environment:
+     - PMA_ARBITRARY=1
+    restart: unless-stopped
+    ports:
+     - 8080:80
+    volumes:
+     - /sessions
