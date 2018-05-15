@@ -1,4 +1,4 @@
-FROM php:7.1-fpm
+FROM php:7.0-fpm
 RUN apt-get update && apt-get install -y \
 	sudo \
 	git \
@@ -37,7 +37,7 @@ RUN sed -i '1 a xdebug.remote_enable=1' /usr/local/etc/php/conf.d/docker-php-ext
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # Node.js
-RUN curl -sL https://deb.nodesource.com/setup_7.x | sudo -E bash -
+RUN curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
 RUN apt-get install -y nodejs
 
 # Gulp
