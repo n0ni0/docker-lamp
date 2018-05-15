@@ -48,6 +48,7 @@ Services:
 * mailcatcher: (accessible on port 1080 with your web brower) 
 * phpmyadmin: (accessible on port 8080 with your web brower)
 * apache: listening on http (80) only
+* portainer: (accessible on port 9009 with your web brower)
 
 Folder structure
 ----
@@ -100,6 +101,8 @@ To stop all containers:
 ```
 sudo docker stop $(sudo docker ps -a -q)
 ```
+
+If you prefer a interface to manage containers, use portainer
 
 PHP Debugging
 ----
