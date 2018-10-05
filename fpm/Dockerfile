@@ -19,7 +19,12 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install -j$(nproc) iconv mcrypt curl dom hash pdo pdo_mysql mysqli simplexml soap xsl intl zip opcache \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install -j$(nproc) gd
+
+# ssmtp
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y ssmtp
+
+# mysql-client
+RUN apt-get update && apt-get install -y mysql-client && rm -rf /var/lib/apt
 
 # Xdebug
 RUN pecl install xdebug-2.5.0 
