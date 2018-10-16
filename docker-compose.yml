@@ -30,6 +30,7 @@ services:
     volumes:
       - ./public:/var/www/html
       - ./fpm/custom.ini:/usr/local/etc/php/conf.d/custom.ini
+      - ./fpm/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
     restart: unless-stopped
     ports: 
       - "35729:35729"
